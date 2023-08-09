@@ -1,0 +1,21 @@
+{% extends 'signalapp/base.html' %}
+{% block content %}
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags == 'error' %}
+            <p class="alert alert-danger">{{ message }}</p>
+        {% else %}
+            <p class="alert alert-{{message.tags}}">{{ message }}</p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+<form action="" method="POST" novalidate>
+    {% csrf_token %}
+    {% for fm in form %}
+    {{fm.label_tag}}
+    {{fm}}
+    {{fm.errors}}
+    {% endfor %}
+    <input type="submit" class="btn btn-primary my-3" value="Submit">
+</form>
+{% endblock content %}
